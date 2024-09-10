@@ -1,0 +1,18 @@
+❯ cat run_client.sh run_server.sh
+#!/usr/bin/bash
+
+docker run -it --rm --net host \
+        --publish=123:123/udp \
+        --env=NTP_SERVERS="192.168.40.127" \
+        --volume /etc/localtime:/etc/localtime:ro \
+        simonrupf/chronyd
+#!/usr/bin/bash
+
+
+docker run  \
+  -it --rm --net host \
+  --cap-add SYS_TIME \
+  --env ALLOW_CIDR=192.168.40.0/24 \
+  --publish 123:123/udp \
+  --volume /etc/localtime:/etc/localtime:ro \
+  geoffh1977/chrony
